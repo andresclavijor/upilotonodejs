@@ -5,8 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+//modelos de la base de datos
+var models = require("./models/index");
+//se cambia index por vistas
+var index = require('./routes/vistas');
+
+//vinculo las rutas
+var semilleros=require('./routes/semilleros');
+var publicaciones=require('./routes/publicaciones');
 
 var app = express();
 
@@ -21,9 +27,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+//se quita ruta de usuarios
 app.use('/', index);
-app.use('/users', users);
+app.use('/semilleros', semilleros);
+app.use('/publicaciones', publicaciones);
+
+//sincronizacion de la base de datos
+models.sequelize.sync().then(
+  function(){
+    console.log("se conecto la BD!!!");
+  }
+).catch(
+  function(error){
+    console.log("error en la conexion:"+error);
+  }
+);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

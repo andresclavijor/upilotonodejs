@@ -1,0 +1,37 @@
+  <% include ./templates/header %>
+<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>idSemillero</th>
+                <th>nombre Semillero</th>
+                <th>descripcion</th>
+                <th>lider</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <tfoot>
+            <tr>
+              <th>idSemillero</th>
+              <th>nombre Semillero</th>
+              <th>descripcion</th>
+              <th>lider</th>
+            </tr>
+        </tfoot>
+    </table>
+<%include ./templates/scripts %>
+<script>
+$(document).ready(function() {
+      $('#example').DataTable( {
+        "ajax": "semilleros/listaSemilleros",
+        "columns": [
+            { "data": "idSemillero"},
+            { "data": "nombreSemillero" },
+            { "data": "descripcionSemillero" },
+            { "data": "liderSemillero"}
+        ]
+      } );
+} );
+</script>
+<%include ./templates/footer %>

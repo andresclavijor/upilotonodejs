@@ -1,0 +1,287 @@
+    1  pwd
+    2  cd ~
+    3  pwd
+    4  cd descktop
+    5  cd descktop
+    6  cd escritorio
+    7  cd documents
+    8  mkdir proyecto
+    9  cd proyecto/
+   10  git init
+   11  echo "mi primer archivo ">archivo1.txt
+   12  cat archivo1.txt
+   13  git status
+   14  git add archivo1.txt 
+   15  git status
+   16  echo "mi segundo archivo" > archivo2.txt
+   17  git commit -m "inicio del proyecto"
+   18  git config user.name ="andres"
+   19  git config user.email ="shipoca2007@hotmail.com"
+   20  git commit -m "inicio del proyecto"
+   21  nano aechivo1
+   22  nano aechivo1.txt
+   23  nano archivo1.txt
+   24  git status
+   25  git add archivo1.txt 
+   26  git status
+   27  git add -A
+   28  git status
+   29  git reset archivo2.txt
+   30  git status
+   31  echo "mi tercer archivo" > archivo3.txt
+   32  echo "mi cuarto archivo" > archivo4.txt
+   33  echo "mi quinto archivo" > archivo5.bin
+   34  git add "*.txt"
+   35  git status
+   36  git add "*"
+   37  git status
+   38  git commit -m "segundo commit"
+   39  git log
+   40  git log--summary
+   41  git log --summary
+   42  cd..
+   43  cd..
+   44  cd..
+   45  cd~
+   46  ped
+   47  pwd
+   48  cd documents/c
+   49  mkdir pagina personal
+   50  mkdir paginapersonal
+   51  mkdir paginapersonal/
+   52  cd documents/paginapersonal
+   53  cd documents/paginapersonal
+   54  cd documents/paginapersonal
+   55  git hub *
+   56  git  add *
+   57  git add *
+   58  git init
+   59  git add *
+   60  git commit
+   61  git status
+   62  git commit "inicio de proyecto pagina personal"
+   63  git commit -m "inicio de proyecto pagina personal"
+   64  git remote add origin https://github.com/andresclavijor/andresclavijor.github.io.git
+   65  git push -u origin master
+   66  git remote add origin
+   67  git remote add origin https://github.com/andresclavijor/andresclavijor.github.io.git
+   68  git remote add origin https://github.com/andresclavijor/andresclavijor.github.io.git
+   69  git status
+   70  git status
+   71  git remote add origin https://github.com/andresclavijor/andresclavijor.github.io.git
+   72  git push -u origin master
+   73  cd 
+   74  cd documens
+   75  ls
+   76  cd documents
+   77  mkdir "proyecto clase 2"
+   78  cd "proyecto clase dos"
+   79  cd "proyecto clase 2"
+   80  echo "primer proyecto " > proyecto
+   81  ls
+   82  git init 
+   83  git status
+   84  git add proyecto 
+   85  git commit -m "mi primer comit"
+   86   git config --global user.email "you@example.com"
+   87   git config --global user.email "shipoca2007@hotmail.com"
+   88   git config --global user.name "Andres"
+   89  git commit -m "mi primer comit"
+   90  git log 
+   91  git log -oneline
+   92  git log --oneline
+   93  git add proyecto
+   94  git status
+   95  git add proyecto.txt
+   96  git status
+   97  git commit -m "mi segundo comit"
+   98  git dif Head
+   99  git diff Head
+  100  git diff master
+  101  git diff Head
+  102  git add proyecto.txt
+  103  git-gui
+  104  gitk
+  105  git commit -m "mi tercer comit"
+  106  git log --oneline
+  107  ls
+  108  git branch "primeraRama"
+  109  git chekout
+  110  git chekout primeraRama
+  111  git checkout primeraRama
+  112  git checkout master
+  113  git checkout primeraRama
+  114  git status
+  115  cat "modificacion para la primera rama" >proyecto.txt
+  116  cat "modificacion para la primera rama" > proyecto.txt
+  117  history > historial.txt
+  118  cat historial.txt 
+  119  git status
+  120  git checkout proyecto.txt
+  121  git status
+  122  git add historial.txt
+  123  git commit "cuarto comit"
+  124  git init
+  125  git status
+  126  git status
+  127  git config --global user.name "andres clavijo"
+  128  git config --global user.email shipoca2007@hotmail.com
+  129  git status
+  130  git add index2.html
+  131  git status
+  132  git remote add origin https://github.com/andresclavijor/parcialPrimerCorte.git
+  133  git commit -m "comit creacion de index"
+  134  git remote add origin https://github.com/andresclavijor/parcialPrimerCorte.git
+  135  git push -u origin master
+  136  git branch "primera rama"
+  137  git branch "primeraRama"
+  138  git status
+  139  git commit -m "se añade referencias e imagen"
+  140  git status
+  141  git checkout primeraRama 
+  142  git status
+  143  git commit -m "se añade referencias e imagen"
+  144  git add index2.html
+  145  git add.
+  146  git add .
+  147  git commit -m "se añade referencias e imagen"
+  148  git checkout master
+  149  git status
+  150  git branch "segundaRama"
+  151  git checkout segundaRama 
+  152  git status
+  153  git add .
+  154  git 
+  155  git commit -m "se añade imagen y pagina contexto para añadir enlace"
+  156  git status
+  157  git checkout master 
+  158  git checkout segundaRama 
+  159  git checkout primeraRama
+  160  git branch "segundaRama"
+  161  git checkout segundaRama 
+  162  git branch "TerceraRama"
+  163  git checkout TerceraRama 
+  164  git status
+  165  git add .
+  166  git commit -m "muestra la funcionalidad del texto"
+  167  git checkout smaster
+  168  git checkout master
+  169  git branch "cuartaRama"
+  170  git checkout cuartaRama  
+  171  git status
+  172  git add .
+  173  git status
+  174  git commit -m "se añaden las listas ordenadas"
+  175  git status
+  176  git add .
+  177  git commit -m "se añaden tablas"
+  178  git status
+  179  git checkout master
+  180  git branch "quintaRama"
+  181  git checkout quintaRama 
+  182  git commit -m "se añade video"
+  183  git add .
+  184  git commit -m "se añade video"
+  185  git checkout master
+  186  git branch "sextaRama"
+  187  git checkout sextaRama
+  188  git add .
+  189  git commit -m "se añade lista no ordenada"
+  190  git status
+  191  git checkout naster
+  192  git checkout master
+  193  git branch ""
+  194  git checkout septimaRama
+  195  git status
+  196  git add .
+  197  git commit -m "se añade pie de pagina"
+  198  git checkout master
+  199  git checkout quintaRama 
+  200  git status
+  201  git add .
+  202  git commit -m "se añade video"
+  203  git checkout master
+  204  git checkout segunda rama
+  205  git checkout segundaRama 
+  206  status
+  207  git add .
+  208  git commit -m "se corrige pagina de contexto"
+  209  git status
+  210  git checkout master
+  211  git merge nombre_rama
+  212  git merge primeraRama 
+  213  git merge segundaRama 
+  214  git checkout master
+  215  git merge segundaRama
+  216  git checkout master
+  217  git merge septima rama
+  218  git merge TerceraRama 
+  219  git status
+  220  git add .
+  221  git commit -m "fin del proyecto"
+  222  git commit -m "se corrige pagina final"
+  223  git push origin 
+  224  git merge segundaRam
+  225   
+  226  git checkout septima rama
+  227  git checkout master
+  228  git status
+  229  git status
+  230  git add .
+  231  git commit -m "se añade video"
+  232  git push origin 
+  233  node
+  234  node
+  235  node callback.js 
+  236  node callback.js 
+  237  node callback.js 
+  238  node callback2.js 
+  239  node callback2.js 
+  240  node BasicServer.js
+  241  node BasicServer.js
+  242  node BasicServer.js
+  243  node BasicServerDelay.js
+  244  node BasicEvent.js
+  245  node BasicEvent.js
+  246  node BasicEvent.js
+  247  node BasicEvent.js
+  248  node BasicEvent.js
+  249  node BasicEvent.js
+  250  node BasicEvent.js
+  251  node BasicEvent.js
+  252  exit
+  253  node
+  254  node StreamServer.js
+  255  node StreamServer.js
+  256  node StreamServer.js
+  257  node StreamServer.js
+  258  node CopyFiles.js 
+  259  node CopyFiles.js 
+  260  node CopyFiles.js 
+  261  node CopyFiles.js 
+  262  node fileServer.js
+  263  node fileServer.js
+  264  node fileServer.js
+  265  fileServerProgress.js
+  266  node fileServerProgress.js
+  267  exit
+  268  ls
+  269  cd Documents/proyecto clase 2/
+  270  cd Documents/"proyecto clase 2"/
+  271  ls
+  272  node invocacion-modulo.js 
+  273  npm install express-generator -g
+  274  express --view=ejs ExpressUpiloto
+  275  cd ExpressUpiloto/
+  276  ls
+  277  npm install
+  278  npm start
+  279  npm start
+  280  npm start
+  281  git init
+  282  git add *
+  283  git commit -m "inicio del proyecto"
+  284  git add remote add origin https://github.com/andresclavijor/upilotonodejs.git
+  285  git remote add origin https://github.com/andresclavijor/upilotonodejs.git
+  286  git push -u origin master
+  287  history>>bash.txt
