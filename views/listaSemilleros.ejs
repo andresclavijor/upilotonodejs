@@ -6,6 +6,7 @@
                 <th>nombre Semillero</th>
                 <th>descripcion</th>
                 <th>lider</th>
+                <th>accion</th>
             </tr>
         </thead>
         <tbody>
@@ -17,21 +18,114 @@
               <th>nombre Semillero</th>
               <th>descripcion</th>
               <th>lider</th>
+              <th>accion</th>
             </tr>
         </tfoot>
     </table>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modificar semillero</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                            <div class="form-group">
+                                    <label for="idSemillero">Id Semillero</label>
+                                    <input type="text" class="form-control" name="idSemillero" id="idSemillero" aria-describedby="id semillero" placeholder="id semillero"
+                                        readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombreSemillero">Nombre Semillero</label>
+                                    <input type="text" class="form-control" name="nombreSemillero" id="nombreSemillero" aria-describedby="Nombre semillero" placeholder="nombre semillero">
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcionSemillero">descripcion semillero</label>
+                                    <input type="text" class="form-control" name="descripcionSemillero" id="descripcionSemillero" placeholder="Descripcion">
+                                </div>
+                                <div class="form-group">
+                                    <label for="liderSemillero">Lider Semillero</label>
+                                    <input type="text" class="form-control" name="liderSemillero" id="liderSemillero" aria-describedby="Nombre del lider del semillero"
+                                        placeholder="lider del semillero">
+                                </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+                    <button type="button" id="salvarCambios" class="btn btn-primary">Salvar cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
 <%include ./templates/scripts %>
 <script>
+    var tabla= null;
+    var filaSeleccion = null;
 $(document).ready(function() {
-      $('#example').DataTable( {
+      tabla= $('#example').DataTable( {
         "ajax": "semilleros/listaSemilleros",
         "columns": [
             { "data": "idSemillero"},
             { "data": "nombreSemillero" },
             { "data": "descripcionSemillero" },
-            { "data": "liderSemillero"}
+            { "data": "liderSemillero"},
+            { "data": null,
+            "className":"center","defaultContent":
+            '<button type="button" class="btn btn-primary "href="" id="editar">Editar</button> / <a href="" id="eliminar">Eliminar</a>'}
         ]
       } );
-} );
+});
+$("#example tbody").on('click','a#eliminar',function(e){
+          e.preventDefault();
+          let fila= $(this).closest("tr");
+          let informacion= tabla.row(fila).data();
+          console.log("informacion",informacion);
+          $.ajax(
+              'semilleros/eliminarSemillero/'+informacion.idSemillero,
+              {
+                  type:"POST",
+                  success:function(){
+                  fila.remove();
+                  console.log("eliminado con exito");
+                  },
+                  error:(e)=>{
+                      console.log("Error: ",e);
+                  }
+              }
+          );
+      });
+      
+      $("#example tbody").on('click','button#editar',function(e){
+          e.preventDefault();
+          let fila= $(this).closest("tr");
+          let informacion= tabla.row(fila).data();
+          $("#idSemillero").val(informacion.idSemillero);
+          $("#nombreSemillero").val(informacion.nombreSemillero);
+          $("#liderSemillero").val(informacion.liderSemillero);
+          $("#descripcionSemillero").val(informacion.descripcionSemillero);
+          $("#exampleModal").modal("show");
+          console.log(e);
+      });
+
+      $("#salvarCambios").click(function(){
+          console.log("datos: ",$("form").serialize());
+
+          $.ajax(
+              'semilleros/modificarSemillero/', {
+                type:"POST",
+                data: $("form").serialize(),
+                  success:function(e){                  
+                      console.log("editado con exito",e);
+                  },
+                  error:(e)=>{
+                      console.log("Error: ",e);
+                  }
+              }
+          );
+      });
+      
 </script>
 <%include ./templates/footer %>

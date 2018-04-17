@@ -46,7 +46,7 @@ router.get('/buscarSemillero/:id',function(req,res){
   );
 });
 
-router.get('/eliminarSemillero/:id',function(req,res){
+router.post('/eliminarSemillero/:id',function(req,res){
   let idSemillero = req.params.id;
   models.Semilleros.find(
     {
