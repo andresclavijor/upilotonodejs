@@ -7,10 +7,9 @@ var bodyParser = require('body-parser');
 
 //modelos de la base de datos
 var models = require("./models/index");
-//se cambia index por vistas
-var index = require('./routes/vistas');
 
 //vinculo las rutas
+var index = require('./routes/vistas');
 var semilleros=require('./routes/semilleros');
 var publicaciones=require('./routes/publicaciones');
 
@@ -29,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //se quita ruta de usuarios
 app.use('/', index);
+
 app.use('/semilleros', semilleros);
 app.use('/publicaciones', publicaciones);
 

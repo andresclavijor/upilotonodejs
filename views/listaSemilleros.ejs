@@ -1,27 +1,44 @@
-  <% include ./templates/header %>
-<table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>idSemillero</th>
-                <th>nombre Semillero</th>
-                <th>descripcion</th>
-                <th>lider</th>
-                <th>accion</th>
-            </tr>
-        </thead>
-        <tbody>
+<% include ./templates/header %>
+<% include ./templates/menu%>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="page-head-line">Editar semillero</h4>
+        </div>
+    </div>    
 
-        </tbody>
-        <tfoot>
-            <tr>
-              <th>idSemillero</th>
-              <th>nombre Semillero</th>
-              <th>descripcion</th>
-              <th>lider</th>
-              <th>accion</th>
-            </tr>
-        </tfoot>
-    </table>
+    <div class="panel panel-default">
+      <div class="panel panel-heading">
+        tabla de lista de semilleros
+      </div>
+      <div class="panel panel-body">
+        <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>idSemillero</th>
+                        <th>nombre Semillero</th>
+                        <th>descripcion</th>
+                        <th>lider</th>
+                        <th>accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                      <th>idSemillero</th>
+                      <th>nombre Semillero</th>
+                      <th>descripcion</th>
+                      <th>lider</th>
+                      <th>accion</th>
+                    </tr>
+                </tfoot>
+            </table>
+      </div>
+    </div>
+    </div>
+
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -97,7 +114,7 @@ $("#example tbody").on('click','a#eliminar',function(e){
               }
           );
       });
-      
+
       $("#example tbody").on('click','button#editar',function(e){
           e.preventDefault();
           let fila= $(this).closest("tr");
@@ -117,7 +134,7 @@ $("#example tbody").on('click','a#eliminar',function(e){
               'semilleros/modificarSemillero/', {
                 type:"POST",
                 data: $("form").serialize(),
-                  success:function(e){                  
+                  success:function(e){
                       console.log("editado con exito",e);
                   },
                   error:(e)=>{
@@ -126,6 +143,6 @@ $("#example tbody").on('click','a#eliminar',function(e){
               }
           );
       });
-      
+
 </script>
 <%include ./templates/footer %>

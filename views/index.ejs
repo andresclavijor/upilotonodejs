@@ -1,12 +1,12 @@
-  <% include ./templates/header %>
-
-    <% for(var i=0;i<info.length;i++){%>
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="http://placeimg.com/120/68/any" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title"><%= info[i].nombreSemillero %></h5>
-          <p class="card-title"><%= info[i].descripcionSemillero %></p>
-          <p class="card-title"><%= info[i].liderSemillero %></p>
-          </div>
+<% include ./templates/header %>
+<% include ./templates/menu%>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <h4 class="page-head-line">Inicio</h4>
       </div>
-  <%}%>
+  </div>
+<%include ./templates/scripts %>
+<script>
+</script>
+<%include ./templates/footer %>
