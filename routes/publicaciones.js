@@ -5,8 +5,18 @@ let router = express.Router();
 
 let models = require('../models/index');
 
-router.get('/listaPublicaciones',function(req,res){
-  models.Publicaciones.findAll().then(
+router.get('/listaPublicaciones', function (req, res, next) {
+  models.sequelize.query('SELECT * FROM "Semilleros" INNER JOIN ' + ' "Publicaciones" ON "Semilleros"."idSemillero"="Publicaciones"."idSemillero"',
+    { type: models.sequelize.QueryTypes.SELECT })
+    .then(lista => {
+      console.log(lista);
+      res.json({ "data": lista });
+    })
+    .catch(
+      (error) => {
+        res.json(error);
+      });
+/*  models.Publicaciones.findAll().then(
     (lista)=>{
         res.json(lista);
     }
@@ -14,7 +24,7 @@ router.get('/listaPublicaciones',function(req,res){
     (error)=>{
       res.json(error);
     }
-  );
+  );*/
 });
 router.post('/crearPublicaciones',function(req,res){
   let infoPublicacion = {
@@ -51,7 +61,7 @@ router.get('/buscarPublicacion/:id',function(req,res){
   );
 });
 
-router.get('/eliminarPublicacion/:id',function(req,res){
+router.post('/eliminarPublicacion/:id',function(req,res){
   let idPublicacion = req.params.id;
   models.Publicaciones.find(
     {

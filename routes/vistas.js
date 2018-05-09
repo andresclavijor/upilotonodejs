@@ -23,7 +23,7 @@ router.get('/detalleSemilleros', function(req, res, next) {
 });
 router.get('/detallePublicaciones', function(req, res, next) {
   let info=[];
-  models.Semilleros.findAll().then(
+  models.Publicaciones.findAll().then(
     (lista)=>{
         res.render('detallePublicaciones',{info:lista});
         console.log(lista);
