@@ -1,0 +1,75 @@
+<% include ./templates/header %>
+<% include ./templates/menu%>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <h4 class="page-head-line">Crear publicacion</h4>
+      </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel panel-heading">
+       <h4>parametros para crear una publicacion</h4>
+      </div>
+      <div class="panel panel-body">
+        <form>
+          <div class="form-group">
+            <label for="fechaPublicacion">fecha Publicacion</label>
+            <input type="text" class="form-control" name="fechaPublicacion" id="fechaPublicacion" aria-describedby="Fecha Publicacion" placeholder="Fecha Publicacion" readonly>
+          </div>
+          <div class="form-group">
+            <label for="imagenPublicacion">imagen Publicacion</label>
+            <input type="text" class="form-control" name="imagenPublicacion" id="imagenPublicacion" placeholder="Descripcion">
+          </div>
+          <div class="form-group">
+            <label for="textoPublicacion">texto Publicacion</label>
+            <input type="text" class="form-control" name="textoPublicacion" id="textoPublicacion" aria-describedby="Texto Publicacion" placeholder="Texto Publicacion">
+          </div>
+          <div class="form-group">
+            <label for="idSemillero">semillero</label>
+            <select class="form-control" name="idSemillero" id="idSemillero"></select>
+          </div>
+          <button id="crearPublicaciones"type="button" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%include ./templates/scripts %>
+<script>
+    $(document).ready(function(){
+
+      $("#crearPublicaciones").on("click",function(){
+        $.ajax('publicaciones/crearPublicaciones',{
+          type:"POST",
+          data:$('form').serialize(),
+          success: function(response){
+            swal("Buen trabajo!", "Se a hagregado con exito la públicación!", "success");
+            console.log(response);
+          }
+        });
+      });
+
+      dibujarListaSemilleros();
+
+      var fechaActual = new Date();
+      $('#fechaPublicacion').val(fechaActual.toISOString());
+
+    });
+
+    function dibujarListaSemilleros(){
+      $.ajax('semilleros/listaSemilleros',{
+        type:"GET",
+        data:null,
+        success:(response)=>{
+          if(response != null ){
+            $.each(response.data,(i,v)=>{
+              $("#idSemillero").append($("<option></option>").val(v.idSemillero).html(v.idSemillero+' - '+v.nombreSemillero));
+            });
+          }
+        }
+      });
+    }
+</script>
+<%include ./templates/footer %>

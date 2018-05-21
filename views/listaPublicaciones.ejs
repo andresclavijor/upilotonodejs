@@ -1,0 +1,199 @@
+<% include ./templates/header %>
+    <% include ./templates/menu%>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">Editar publicaciones</h4>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel panel-heading">
+                    tabla de lista de publicaciones
+                </div>
+                <div class="panel panel-body">
+                    <div class="table-responsive">
+                        <table id="example" class="display nowrap dataTable dtr-inline collapsed" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Id Publicacion</th>
+                                    <th>Fecha publicacion</th>
+                                    <th>Imagen publicaion</th>
+                                    <th>Texto publicacion</th>
+                                    <th>Nombre semillero</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Id Publicacion</th>
+                                    <th>Fecha publicacion</th>
+                                    <th>Imagen publicaion</th>
+                                    <th>Texto publicacion</th>
+                                    <th>Nombre semillero</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modificar publicaciones</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="idPublicacion">Id Publicaion</label>
+                                <input type="text" class="form-control" name="idPublicacion" id="idPublicacion" aria-describedby="id Publicacion" placeholder="id publicacion"
+                                    readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaPublicacion">fecha Publicacion</label>
+                                <input type="text" class="form-control" name="fechaPublicacion" id="fechaPublicacion" aria-describedby="fecha Publicacion"
+                                    placeholder="fecha Publicacion" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="imagenPublicacion">Imagen publicacion</label>
+                                <input type="text" class="form-control" name="imagenPublicacion" id="imagenPublicacion" placeholder="imagen Publicacion">
+                            </div>
+                            <div class="form-group">
+                                <label for="textoPublicacion">texto Publicacion</label>
+                                <input type="text" class="form-control" name="textoPublicacion" id="textoPublicacion" aria-describedby="texto publicacion"
+                                    placeholder="texto publicacion">
+                            </div>
+                            <div class="form-group">
+                                <label for="idSemillero">id Semillero</label>
+                                <select class="form-control" name="idSemillero" id="idSemillero"></select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+                        <button type="button" id="salvarCambios" class="btn btn-primary">Salvar cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%include ./templates/scripts %>
+            <script>
+                var tabla = null;
+                var filaSeleccion = null;
+
+
+                $(document).ready(function () {
+                    cargarListaPublicaciones();
+                });
+
+                function dibujarDataTable(datos) {
+                    tabla = $('#example').DataTable({
+                        "ajax": "publicaciones/listaPublicaciones",
+                        "data": datos,
+                        "columns": [
+                            { "data": "idPublicacion" },
+                            { "data": "fechaPublicacion" },
+                            { "data": "imagenPublicacion" },
+                            { "data": "textoPublicacion" },
+                            { "data": "nombreSemillero" },
+                            {
+                                "data": null, "className": "center", "defaultContent": '<button type="button" class="btn btn-primary "href="" id="editar">Editar</button> / <a href="" id="eliminar">Eliminar</a>'
+                            }],
+                        "responsive": true
+
+                    });
+                }
+                function dibujarListaSemilleros() {
+                    $.ajax('semilleros/listaSemilleros', {
+                        type: "GET",
+                        data: null,
+                        success: (response) => {
+                            if (response != null) {
+                                $.each(response.data, (i, v) => {
+                                    $("#idSemillero").append($("<option></option>").val(v.idSemillero).html(v.idSemillero + ' - ' + v.nombreSemillero));
+                                });
+                            }
+                        }
+                    });
+                }
+                function cargarListaPublicaciones() {
+                    $.ajax('publicaciones/listaPublicaciones/', {
+                        type: "GET",
+                        data: null,
+                        success: function (e) {
+                            console.log("Datos", e);
+                            dibujarDataTable(e);
+                        },
+                        error: (e) => {
+                            console.log("Error: ", e);
+                        }
+                    }
+                    );
+                }
+
+                $("#example tbody").on('click', 'a#eliminar', function (e) {
+                    e.preventDefault();
+                    let fila = $(this).closest("tr");
+                    var informacion = tabla.row(fila).data();
+                    console.log("informacion a eliminar", informacion);
+                    $.ajax('publicaciones/eliminarPublicacion/' + informacion.idPublicacion, {
+                        type: "POST",
+                        data: null,
+                        success: function () {
+                            fila.remove();
+                            swal("Buen trabajo!", "Se a eliminado la publicacion con exito!", "success");
+
+                        },
+                        error: (e) => {
+                            console.log("Error: ", e);
+                        }
+                    }
+                    );
+                });
+
+                $("#example tbody").on('click', 'button#editar', function (e) {
+                    dibujarListaSemilleros();
+                    e.preventDefault();
+                    let fila = $(this).closest("tr");
+                    let informacion = tabla.row(fila).data();
+                    $("#idPublicacion").val(informacion.idPublicacion);
+                    $("#fechaPublicacion").val(informacion.fechaPublicacion);
+                    $("#imagenPublicacion").val(informacion.imagenPublicacion);
+                    $("#textoPublicacion").val(informacion.textoPublicacion);
+                    $("#idSemillero").val(informacion.idSemillero);
+                    $("#exampleModal").modal("show");
+                    console.log(e);
+                });
+
+                $("#salvarCambios").click(function () {
+                    console.log("datos: ", $("form").serialize());
+                    $.ajax('publicaciones/modificarPublicacion/', {
+                        type: "POST",
+                        data: $("form").serialize(),
+                        success: function (e) {
+                            swal({
+                                title: "bien echo!",
+                                text: "tu registro a sido modificado !",
+                                type: "Aceptar"
+                            }).then(function () {
+                                window.location = "listaPublicaciones";
+                            });
+                        },
+                        error: (e) => {
+                            console.log("Error: ", e);
+                        }
+                    }
+                    );
+                });
+
+            </script>
+            <%include ./templates/footer %>

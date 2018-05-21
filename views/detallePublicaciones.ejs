@@ -1,0 +1,34 @@
+<% include ./templates/header %>
+    <% include ./templates/menu%>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">información publicaciones</h4>
+                </div>
+            </div>
+
+            <% for(var i=0;i<info.length;i++){%>
+                <div class="col-md-4">
+                    <div>
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <%= info[i].fechaPublicacion%>
+                            </div>
+                            <div class="panel-body">
+                                <img class="card-img-top img-responsive" src="
+                                <%= info[i].imagenPublicacion%>
+                                " alt="Card image cap">
+                            </div>
+                            <div class="panel-body">
+                                <%= info[i].textoPublicacion %>
+                            </div>
+                            <div class="panel-footer">
+                                <%= info[i].idSemillero %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+        </div>
+        <%include ./templates/scripts %>
+        <%include ./templates/footer %>

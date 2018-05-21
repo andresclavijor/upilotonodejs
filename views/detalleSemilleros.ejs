@@ -1,0 +1,32 @@
+<% include ./templates/header %>
+    <% include ./templates/menu%>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="page-head-line">información semillero</h4>
+                </div>
+            </div>
+
+            <% for(var i=0;i<info.length;i++){%>
+                <div class="col-md-4">
+                    <div>
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <%= info[i].nombreSemillero %>
+                            </div>
+                            <div class="panel-body">
+                                <img class="card-img-top" src="http://placeimg.com/320/240/any" alt="Card image cap">
+                            </div>
+                            <div class="panel-body">
+                                <%= info[i].descripcionSemillero %>
+                            </div>
+                            <div class="panel-footer">
+                                <%= info[i].liderSemillero %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+        </div>
+        <%include ./templates/scripts %>
+        <%include ./templates/footer %>
