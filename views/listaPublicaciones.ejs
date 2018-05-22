@@ -165,8 +165,15 @@
                     e.preventDefault();
                     let fila = $(this).closest("tr");
                     let informacion = tabla.row(fila).data();
+
+                    var now = new Date(informacion.fechaPublicacion);
+                    var day = ("0" + now.getDate()).slice(-2);
+                    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                    var today = now.getFullYear() + "-" + (month) + "-" + (day);
+                    $("#fechaPublicacion").val(today);
+
                     $("#idPublicacion").val(informacion.idPublicacion);
-                    $("#fechaPublicacion").val(informacion.fechaPublicacion);
+                    //$("#fechaPublicacion").val(informacion.fechaPublicacion);
                     $("#imagenPublicacion").val(informacion.imagenPublicacion);
                     $("#textoPublicacion").val(informacion.textoPublicacion);
                     $("#idSemillero").val(informacion.idSemillero);

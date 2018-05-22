@@ -100,19 +100,22 @@ $("#example tbody").on('click','a#eliminar',function(e){
           let fila= $(this).closest("tr");
           let informacion= tabla.row(fila).data();
           console.log("informacion",informacion);
-          $.ajax(
-              'semilleros/eliminarSemillero/'+informacion.idSemillero,
-              {
-                  type:"POST",
-                  success:function(){
+          $.ajax('semilleros/eliminarSemillero/'+informacion.idSemillero, {
+              type:"POST",
+              success:function(){
                   fila.remove();
-                  console.log("eliminado con exito");
+                    swal({
+                        title: "bien echo!",
+                        text: "Se ha eliminado con exito el semillero!",
+                        type: "Aceptar"
+                    }).then(function () {
+                        window.location = "listaSemilleros";
+                    });
                   },
                   error:(e)=>{
                       console.log("Error: ",e);
                   }
-              }
-          );
+              });
       });
 
       $("#example tbody").on('click','button#editar',function(e){
@@ -135,6 +138,13 @@ $("#example tbody").on('click','a#eliminar',function(e){
                 type:"POST",
                 data: $("form").serialize(),
                   success:function(e){
+                      swal({
+                          title: "bien echo!",
+                          text: "Se a hagregado con exito el semillero!",
+                          type: "Aceptar"
+                          }).then(function () {
+                              window.location = "listaSemilleros";
+                              });
                       console.log("editado con exito",e);
                   },
                   error:(e)=>{

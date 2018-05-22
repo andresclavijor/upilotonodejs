@@ -23,7 +23,7 @@
             <input type="text" class="form-control" name="descripcionSemillero" id="descripcionSemillero" placeholder="Descripcion">
           </div>
           <div class="form-group">
-            <label for="liderSemillero">Nombre Semillero</label>
+            <label for="liderSemillero">Lider Semillero</label>
             <input type="text" class="form-control" name="liderSemillero"id="liderSemillero" aria-describedby="Nombre del lider del semillero" placeholder="lider del semillero">
           </div>
           <button id="crearSemillero"type="button" class="btn btn-primary">Submit</button>
@@ -40,8 +40,13 @@
           type:"POST",
           data:$('form').serialize(),
           success: function(response){
-            swal("Buen trabajo!", "Se a hagregado con exito la públicación!", "success");
-            console.log(response);
+              swal({
+                title: "Buen trabajo!",
+                text: "Se ha agregado con exito el semillero!",
+                type: "Aceptar"
+              }).then(function () {
+                window.location = "crearSemillero";
+              });
           }
         });
       });
